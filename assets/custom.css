@@ -1,0 +1,99 @@
+/* 
+assets/custom.css
+Custom styling for BROIndex Dashboard.
+Implements visual cues for temperature and humidity gradients.
+*/
+
+/* 
+=============================================================
+1. Typography & Global Layout
+============================================================= 
+*/
+body {
+    background-color: #f8f9fa; /* Light, clean background */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Ensure the main container doesn't get hidden behind the fixed sidebar */
+#page-content {
+    margin-left: 16.666667%; /* Matches the 2-column width of the sidebar */
+    padding: 2rem;
+}
+
+/* 
+=============================================================
+2. Component Styling Overrides
+============================================================= 
+*/
+/* Softer shadows for cards to create an elegant depth */
+.card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    border-radius: 0.5rem;
+}
+
+.card-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    font-weight: 600;
+}
+
+/* Sidebar styling */
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #0d6efd; /* Primary blue */
+    color: white !important;
+}
+.nav-link {
+    color: #495057;
+    margin-bottom: 0.25rem;
+    border-radius: 0.375rem;
+}
+.nav-link:hover {
+    background-color: #e9ecef;
+}
+
+/* 
+=============================================================
+3. Visual Cues: Temperature Gradients
+Blue for cold, Red for hot, with a gradient in between.
+These classes can be applied to grid cells or status indicators.
+============================================================= 
+*/
+.temp-cold { background-color: #a3c2fa; color: #000; } /* Blue */
+.temp-cool { background-color: #d1e3fa; color: #000; }
+.temp-ideal { background-color: #e2f0d9; color: #000; } /* Greenish/Neutral */
+.temp-warm { background-color: #fce4e4; color: #000; }
+.temp-hot { background-color: #f5a9a9; color: #000; } /* Red */
+.temp-critical { background-color: #d9534f; color: #fff; font-weight: bold; } /* Deep Red */
+
+
+/* 
+=============================================================
+4. Visual Cues: Humidity Gradients
+Beige for dry, Deep Blue for wet.
+============================================================= 
+*/
+.hum-dry { background-color: #f5f5dc; color: #000; } /* Beige */
+.hum-low { background-color: #e8e8c8; color: #000; }
+.hum-ideal { background-color: #d0e1f9; color: #000; } /* Light Blue */
+.hum-high { background-color: #89b4f8; color: #000; } 
+.hum-wet { background-color: #4285f4; color: #fff; } /* Deep Blue */
+
+
+/* 
+=============================================================
+5. Alert & Status Indicators
+============================================================= 
+*/
+.status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-normal { background-color: #28a745; } /* Green */
+.status-warning { background-color: #ffc107; } /* Yellow */
+.status-critical { background-color: #dc3545; } /* Red */
+.status-offline { background-color: #6c757d; } /* Gray */
