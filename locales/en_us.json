@@ -1,0 +1,26 @@
+{
+    "nav": {
+        "overview": "Overview",
+        "sheds": "Sheds",
+        "sensors": "Sensors",
+        "batches": "Batches",
+        "alerts": "Alerts",
+        "admin": "Admin"
+    },
+    "overview": {
+        "title": "Farm Overview",
+        "batch_kpis": "Batch KPIs",
+        "active_alerts": "Active Alerts",
+        "active_sheds": "Active Sheds"
+    },
+    "common": {
+        "active": "Active",
+        "inactive": "Inactive",
+        "save": "Save",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "delete": "Delete",
+        "temperature": "Temperature",
+        "humidity": "Humidity"
+    }
+}
