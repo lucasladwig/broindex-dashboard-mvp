@@ -29,9 +29,8 @@ dist/
 data/db/*
 !data/db/.gitkeep
 
-# Simulated Data
-# (Uncomment the line below if you want to ignore local CSV telemetry files)
-# data/simulated_csv/*.csv
+# Data
+data/simulated_csv/*.csv
 
 # Testing / Linters
 .pytest_cache/
