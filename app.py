@@ -16,6 +16,7 @@ import dash_bootstrap_components as dbc
 app = Dash(
     __name__,
     use_pages=True,
+    pages_folder="src/pages",
     external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.BOOTSTRAP]
 )
 
