@@ -1,0 +1,26 @@
+{
+    "nav": {
+        "overview": "Visão Geral",
+        "sheds": "Galpões",
+        "sensors": "Sensores",
+        "batches": "Lotes",
+        "alerts": "Alertas",
+        "admin": "Administração"
+    },
+    "overview": {
+        "title": "Visão Geral da Granja",
+        "batch_kpis": "KPIs dos Lotes",
+        "active_alerts": "Alertas Ativos",
+        "active_sheds": "Galpões Ativos"
+    },
+    "common": {
+        "active": "Ativo",
+        "inactive": "Inativo",
+        "save": "Salvar",
+        "cancel": "Cancelar",
+        "edit": "Editar",
+        "delete": "Excluir",
+        "temperature": "Temperatura",
+        "humidity": "Umidade"
+    }
+}
