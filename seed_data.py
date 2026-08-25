@@ -55,15 +55,15 @@ def seed_database():
         db.flush()
 
         # 3. Create Sensors and map them to Shed 01's grid
-        sensors = [
-            Sensor(brand="Sensirion", model="SHT31", mac_address="00:1B:44:11:3A:B7",
-                   shed_id=shed1.id, grid_x=1, grid_y=1, status="active"),
-            Sensor(brand="Sensirion", model="SHT31", mac_address="00:1B:44:11:3A:B8",
-                   shed_id=shed1.id, grid_x=3, grid_y=3, status="active"),
-            Sensor(brand="Bosch", model="BME280", mac_address="00:1B:44:11:3A:B9",
-                   shed_id=shed1.id, grid_x=5, grid_y=5, status="active"),
-        ]
-        db.add_all(sensors)
+        # sensors = [
+        #     Sensor(brand="Sensirion", model="SHT31", mac_address="00:1B:44:11:3A:B7",
+        #            shed_id=shed1.id, grid_x=1, grid_y=1, status="active"),
+        #     Sensor(brand="Sensirion", model="SHT31", mac_address="00:1B:44:11:3A:B8",
+        #            shed_id=shed1.id, grid_x=3, grid_y=3, status="active"),
+        #     Sensor(brand="Bosch", model="BME280", mac_address="00:1B:44:11:3A:B9",
+        #            shed_id=shed1.id, grid_x=5, grid_y=5, status="active"),
+        # ]
+        # db.add_all(sensors)
 
         # 4. Create an Active Batch in Shed 01
         batch = Batch(
