@@ -29,8 +29,8 @@ dist/
 data/db/*
 !data/db/.gitkeep
 
-# Data
-data/simulated_csv/*.csv
+# Raw data files
+data/raw/*
 
 # Testing / Linters
 .pytest_cache/
