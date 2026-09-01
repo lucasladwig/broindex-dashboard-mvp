@@ -9,16 +9,19 @@ import dash_bootstrap_components as dbc
 from src.models.database import SessionLocal
 from src.models.sensors import Sensor
 from src.models.farm import Shed
+from src.components.sensor_modal import sensor_modal
 
 dash.register_page(__name__, path="/sensors", name="Sensors")
 
 layout = dbc.Container([
     # 5-second polling interval
     dcc.Interval(id="sensors-interval", interval=5000, n_intervals=0),
+    sensor_modal,
 
     dbc.Row([
         dbc.Col(html.H2("Sensor Fleet"), width=8),
-        dbc.Col(dbc.Button("Register Sensor", id="btn-register-sensor",
+        # 1. Updated ID to pattern-matching dictionary
+        dbc.Col(dbc.Button("Register Sensor", id={'type': 'add-sensor-btn', 'index': 'new'},
                 color="primary", className="float-end"), width=4)
     ], className="mb-4"),
 
@@ -87,10 +90,10 @@ def update_sensors_list(_):
                     html.Td(dbc.Badge(s.status.upper(),
                             color=badge_color, pill=True)),
                     html.Td([
-                        # Add a View button that routes to the details page
                         dbc.Button(
                             "View", href=f"/sensors/{s.id}", size="sm", color="primary", className="me-2 py-0"),
-                        dbc.Button("Reassign", size="sm",
+                        # 2. Updated ID to pattern-matching dictionary passing the sensor's ID
+                        dbc.Button("Reassign", id={'type': 'edit-sensor-btn', 'index': s.id}, size="sm",
                                    color="outline-secondary", className="py-0")
                     ])
                 ], className="align-middle")

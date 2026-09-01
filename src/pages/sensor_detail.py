@@ -12,6 +12,7 @@ from src.models.sensors import Sensor
 from src.models.farm import Shed
 from src.components.charts import create_dual_axis_telemetry_chart
 from src.services.telemetry_service import get_24h_sensor_telemetry
+from src.components.sensor_modal import sensor_modal
 
 dash.register_page(
     __name__, path_template="/sensors/<sensor_id>", name="Sensor Details")
@@ -24,8 +25,12 @@ def layout(sensor_id=None, **kwargs):
         dcc.Interval(id="sensor-detail-interval",
                      interval=5000, n_intervals=0),
 
+        # Inject Shared Component
+        sensor_modal,
+
         # Header Section
-        dbc.Row(id="sensor-header-container", className="mb-4 mt-2"),
+        dbc.Row(id="sensor-header-container",
+                className="mb-4 mt-2 align-items-center"),
 
         # Telemetry Chart Section
         dbc.Card([
@@ -66,9 +71,15 @@ def update_sensor_detail(_, sensor_id):
         badge_color = "success" if sensor.status.lower() == "active" else "warning"
 
         header = dbc.Col([
-            dbc.Badge(sensor.status.upper(), color=badge_color,
-                      className="float-end"),
-            html.H2(f"Sensor SEN-{sensor.id:03d}", className="text-primary"),
+            dbc.Row([
+                dbc.Col(html.H2(
+                    f"Sensor SEN-{sensor.id:03d}", className="text-primary mb-0"), width="auto"),
+                dbc.Col(dbc.Badge(sensor.status.upper(), color=badge_color,
+                        className="ms-2 mt-2"), width="auto"),
+                # Add the Edit button triggering the modal
+                dbc.Col(dbc.Button("Edit Config", id={
+                        'type': 'edit-sensor-btn', 'index': sensor.id}, color="outline-secondary", size="sm", className="ms-3"), width="auto")
+            ], className="align-items-center mb-2"),
             html.P([
                 html.Strong("Hardware: "), f"{sensor.brand} {sensor.model}",
                 html.Span(" | ", className="mx-2 text-muted"),

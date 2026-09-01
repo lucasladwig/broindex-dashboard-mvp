@@ -13,6 +13,7 @@ from plotly.subplots import make_subplots
 from datetime import datetime, timezone
 from src.models.database import SessionLocal
 from src.models.farm import Batch, Shed
+from src.components.batch_modal import batch_modal
 
 dash.register_page(
     __name__, path_template="/batches/<batch_id>", name="Batch Details")
@@ -23,6 +24,8 @@ def layout(batch_id=None, **kwargs):
         dcc.Store(id="current-batch-id", data=batch_id),
         # 5-second polling interval
         dcc.Interval(id="batch-detail-interval", interval=5000, n_intervals=0),
+
+        batch_modal,
 
         # Header and KPIs
         dbc.Row(id="batch-header-container", className="mb-4 mt-2"),
@@ -65,11 +68,17 @@ def update_batch_detail(_, batch_id):
         start_date = batch.start_date.replace(
             tzinfo=timezone.utc) if batch.start_date.tzinfo is None else batch.start_date
         age_days = max(0, (datetime.now(timezone.utc) - start_date).days)
+        badge_color = "success" if batch.status.lower() == "active" else "secondary"
 
         header = dbc.Col([
-            dbc.Badge(batch.status.upper(), color="success" if batch.status ==
-                      "active" else "secondary", className="float-end"),
-            html.H2(f"Batch {batch.batch_number}", className="text-primary"),
+            dbc.Row([
+                dbc.Col(html.H2(f"Batch {batch.batch_number}",
+                        className="text-primary mb-0"), width="auto"),
+                dbc.Col(dbc.Badge(batch.status.upper(), color=badge_color,
+                        className="ms-2 mt-2"), width="auto"),
+                dbc.Col(dbc.Button("Edit Config", id={
+                        'type': 'edit-batch-btn', 'index': batch.id}, color="outline-secondary", size="sm", className="ms-3"), width="auto")
+            ], className="align-items-center mb-2"),
             html.P([
                 html.Strong("Location: "), shed_name,
                 html.Span(" | ", className="mx-2 text-muted"),
