@@ -1,0 +1,17 @@
+broindex/
+├── app.py
+├── pyproject.toml
+├── requirements.txt
+├── assets/
+├── data/
+│   ├── db/
+│   └── simulated_csv/
+├── locales/
+│   ├── en.json
+│   └── pt_br.json
+└── src/
+    ├── components/
+    ├── pages/
+    ├── models/
+    ├── services/
+    └── utils/
