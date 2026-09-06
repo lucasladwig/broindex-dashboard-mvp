@@ -12,7 +12,6 @@ from src.models.farm import Shed
 from src.models.sensors import Sensor
 from src.components.shed_grid import create_sensor_grid
 from src.components.charts import create_dual_axis_telemetry_chart
-from src.components.shed_modal import shed_modal
 from src.services.telemetry_service import get_24h_sensor_telemetry
 
 # Register page with a dynamic path variable for the shed ID
@@ -27,11 +26,9 @@ def layout(shed_id=None, **kwargs):
     return dbc.Container([
         dcc.Store(id="current-shed-id", data=shed_id),
         dcc.Interval(id="shed-detail-interval", interval=5000, n_intervals=0),
-        shed_modal,  # Injected Shared Component
 
         # Header Section
-        dbc.Row(id="shed-header-container",
-                className="mb-4 mt-2 align-items-center"),
+        dbc.Row(id="shed-header-container", className="mb-4 mt-2"),
 
         # Grid Section
         dbc.Card([
@@ -72,13 +69,7 @@ def update_shed_detail(n, shed_id):
             return dbc.Col(html.H4("Shed not found in database.", className="text-danger")), html.Div()
 
         header = dbc.Col([
-            dbc.Row([
-                dbc.Col(
-                    html.H2(shed.name, className="text-primary mb-0"), width="auto"),
-                # Add the Edit button triggering the modal
-                dbc.Col(dbc.Button("Edit Config", id={
-                        'type': 'edit-shed-btn', 'index': shed.id}, color="outline-secondary", size="sm", className="ms-3"), width="auto")
-            ], className="align-items-center mb-2"),
+            html.H2(shed.name, className="text-primary"),
             html.P([
                 html.Strong(
                     "Dimensions: "), f"{shed.width_m}m x {shed.length_m}m",

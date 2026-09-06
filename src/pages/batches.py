@@ -10,18 +10,16 @@ from datetime import datetime, timezone
 from src.models.database import SessionLocal
 from src.models.farm import Batch, Shed
 from src.components.kpi_cards import create_batch_kpi_card
-from src.components.batch_modal import batch_modal
 
 dash.register_page(__name__, path="/batches", name="Batches")
 
 layout = dbc.Container([
     # 5-second polling interval
     dcc.Interval(id="batches-interval", interval=5000, n_intervals=0),
-    batch_modal,
 
     dbc.Row([
         dbc.Col(html.H2("Batch Management"), width=8),
-        dbc.Col(dbc.Button("Start New Batch", id={'type': 'add-batch-btn', 'index': 'new'},
+        dbc.Col(dbc.Button("Register New Batch", id="btn-add-batch",
                 color="primary", className="float-end"), width=4)
     ], className="mb-4"),
 
@@ -109,9 +107,7 @@ def update_batches_list(_):
                         html.Td(b.bird_strain),
                         html.Td(f"{b.initial_count:,}"),
                         html.Td(start_date.strftime("%Y-%m-%d")),
-                        html.Td(dbc.Badge(b.status.upper(), color="secondary")),
-                        html.Td(dbc.Button("Edit", id={
-                                'type': 'edit-batch-btn', 'index': b.id}, size="sm", color="outline-secondary", className="py-0"))
+                        html.Td(dbc.Badge(b.status.upper(), color="secondary"))
                     ], className="align-middle")
                 )
 
@@ -127,8 +123,7 @@ def update_batches_list(_):
             table_header = [html.Thead(html.Tr([
                 html.Th("Batch"), html.Th("Location"), html.Th("Strain"),
                 html.Th("Initial Count"), html.Th(
-                    "Start Date"), html.Th("Status"),
-                html.Th("Actions")
+                    "Start Date"), html.Th("Status")
             ]))]
             table_body = [html.Tbody(history_rows)]
             history_ui = [
